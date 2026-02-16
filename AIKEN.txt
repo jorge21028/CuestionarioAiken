@@ -47,6 +47,11 @@ E. iplookup
 ANSWER: D
 
 ¿Cuál de las siguientes salidas proviene del comando free?
+A. total
+B. dns
+C. used
+D. free
+E. 2097148
 ANSWER: E
 
 ¿Qué es cierto acerca del comando dmesg? (Elija dos)
@@ -122,7 +127,12 @@ E. -z2
 ANSWER: B, D
 
 ¿Qué palabra clave se utiliza en un script de shell para iniciar un bucle? (Especifique solo una palabra clave, sin información adicional)
-ANSWER: for
+A. For
+B. If
+C. Stop
+D. Righ
+E. -z2
+ANSWER: A
 
 ¿Cuál de los siguientes comandos crea un archivo work.tar a partir del contenido del directorio ./work/?
 A. tar --new work.tar ./work/
@@ -301,7 +311,12 @@ E. cp $?.txt /tmp/
 ANSWER: B
 
 Al escribir una línea de comando larga en el shell, ¿qué carácter se puede usar para dividir un comando en varias líneas?
-ANSWER: \
+A. \
+B. *
+C. -
+D. +
+E. Copy
+ANSWER: A
 
 ¿Cuál de los siguientes tipos de registros DNS contiene una dirección IP? (Elija dos)
 A. NS
@@ -424,7 +439,13 @@ E. Bloquea la cuenta root en períodos de tiempo específicos.
 ANSWER: C
 
 ¿Qué parámetro de ls imprime una lista recursiva del contenido de un directorio? (Especifique SOLO el nombre de la opción sin ningún valor ni parámetro)
-ANSWER: -R
+A. -Q
+B. -R
+C. -T
+D. -Z
+E. -P
+
+ANSWER: B
 
 La mayoría de los comandos en Linux pueden mostrar información sobre su uso. ¿Cómo se suele mostrar esta información?
 A. Ejecutando el comando con la opción /? o /??.
@@ -475,7 +496,12 @@ E. USERNAME=bob
 ANSWER: E
 
 ¿Qué comando muestra páginas del manual? (Especifique SOLO el comando sin ninguna ruta ni parámetros)
-ANSWER: man
+A. Dir
+B. cls
+C. Var
+D. esc
+E. man
+ANSWER: E
 
 ¿Qué comando copia el contenido del directorio /etc/, incluidos todos los subdirectorios, a /root/?
 A. copy /etc /root
