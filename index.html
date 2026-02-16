@@ -6,68 +6,51 @@
 <title>Evaluación Académica</title>
 
 <style>
-:root {
-    --primary:#2c3e50;
-    --success:#27ae60;
-    --danger:#e74c3c;
-    --background:#f4f7f6;
+:root{
+ --primary:#2c3e50;
+ --background:#f4f7f6;
 }
 body{
-    font-family:'Segoe UI',sans-serif;
-    background:var(--background);
-    padding:20px;
+ font-family:Segoe UI,sans-serif;
+ background:var(--background);
+ padding:20px;
 }
 .container{
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:8px;
-    box-shadow:0 4px 6px rgba(0,0,0,0.1);
+ max-width:900px;
+ margin:auto;
+ background:white;
+ padding:30px;
+ border-radius:8px;
+ box-shadow:0 4px 6px rgba(0,0,0,0.1);
 }
 .question-card{
-    margin-bottom:25px;
-    padding:20px;
-    border-left:5px solid var(--primary);
-    background:#f9f9f9;
+ margin-bottom:20px;
+ padding:15px;
+ border-left:5px solid var(--primary);
+ background:#f9f9f9;
 }
 .option{
-    margin:8px 0;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:4px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-}
-.option input{
-    margin-right:10px;
-}
-.selected{
-    background:#e8f0fe;
-    border-color:#3498db;
+ display:block;
+ padding:8px;
+ margin:5px 0;
+ border:1px solid #ddd;
+ border-radius:4px;
+ cursor:pointer;
 }
 button{
-    background:var(--primary);
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:4px;
-    cursor:pointer;
-    margin-top:10px;
-}
-.badge{
-    font-size:0.8em;
-    padding:3px 8px;
-    border-radius:10px;
-    background:#eee;
-    margin-left:10px;
+ background:var(--primary);
+ color:white;
+ border:none;
+ padding:10px 20px;
+ border-radius:4px;
+ cursor:pointer;
+ margin-top:15px;
 }
 .hidden{display:none;}
 input[type="text"]{
-    padding:8px;
-    width:100%;
-    margin-bottom:15px;
+ width:100%;
+ padding:8px;
+ margin-bottom:15px;
 }
 </style>
 </head>
@@ -77,178 +60,145 @@ input[type="text"]{
 <h1>Evaluación Académica</h1>
 
 <label>Nombre del estudiante:</label>
-<input type="text" id="studentName" placeholder="Ingrese su nombre">
+<input type="text" id="studentName">
 
 <div id="quiz-container" class="hidden">
-    <div id="questions-area"></div>
-    <button id="submit-btn">Finalizar y Calificar</button>
+ <div id="questions-area"></div>
+ <button id="submit-btn">Finalizar y Calificar</button>
 </div>
 
 <div id="result-container" class="hidden">
-    <h2>Resultados</h2>
-    <p id="score-text" style="font-size:1.4em;font-weight:bold;"></p>
-    <button onclick="location.reload()">Reiniciar</button>
+ <h2>Resultado</h2>
+ <p id="score-text" style="font-weight:bold;font-size:1.3em;"></p>
+ <button onclick="location.reload()">Reiniciar</button>
 </div>
+
 </div>
 
 <script>
 
-let allQuestions = [];
+let questions=[];
 let startTime;
 
-window.addEventListener('DOMContentLoaded', () => {
-    loadDefaultFile();
-});
+window.onload=loadFile;
 
-function loadDefaultFile(){
-    const url = "https://jorge21028.github.io/CuestionarioAiken/AIKEN.txt";
+function loadFile(){
 
-    fetch(url)
-    .then(response => response.text())
-    .then(text => {
-        parseAiken(text);
-        startQuiz();
-    })
-    .catch(err => {
-        alert("Error cargando archivo desde GitHub");
-        console.error(err);
-    });
+ const url="https://jorge21028.github.io/CuestionarioAiken/AIKEN.txt";
+
+ fetch(url)
+ .then(res=>res.text())
+ .then(text=>{
+     parseAiken(text);
+     startQuiz();
+ })
+ .catch(err=>alert("Error cargando archivo"));
 }
 
 function parseAiken(text){
-    const lines = text.split(/\r?\n/);
-    let currentQ = null;
 
-    lines.forEach(line=>{
-        line=line.trim();
-        if(!line) return;
+ const lines=text.split(/\r?\n/);
+ let current=null;
 
-        if(line.startsWith('ANSWER:')){
-            const ansRaw=line.split(':')[1].trim();
-            currentQ.answer=ansRaw.split(/[\s,]+/).filter(x=>x);
-            currentQ.isMultiple=currentQ.answer.length>1;
-            currentQ.id=allQuestions.length;
-            allQuestions.push(currentQ);
-            currentQ=null;
-        }
-        else if(/^[A-Z][\.\)]/.test(line)){
-            currentQ.options.push({
-                letter:line[0],
-                content:line.substring(2).trim()
-            });
-        }
-        else{
-            currentQ={
-                question:line,
-                options:[]
-            };
-        }
-    });
+ lines.forEach(line=>{
+   line=line.trim();
+   if(!line) return;
+
+   if(line.startsWith("ANSWER:")){
+     current.answer=line.split(":")[1].trim().split(/[\s,]+/);
+     current.id=questions.length;
+     questions.push(current);
+     current=null;
+   }
+   else if(/^[A-Z][\.\)]/.test(line)){
+     current.options.push({
+       letter:line[0],
+       content:line.substring(2).trim()
+     });
+   }
+   else{
+     current={question:line,options:[]};
+   }
+ });
 }
 
 function startQuiz(){
-    document.getElementById('quiz-container').classList.remove('hidden');
-    renderQuestions();
-    startTime = new Date();
+ document.getElementById("quiz-container").classList.remove("hidden");
+ render();
+ startTime=new Date();
 }
 
-function renderQuestions(){
-    const area=document.getElementById('questions-area');
-    area.innerHTML='';
+function render(){
 
-    allQuestions.forEach((q,index)=>{
-        const div=document.createElement('div');
-        div.className='question-card';
+ const area=document.getElementById("questions-area");
+ area.innerHTML="";
 
-        const typeText=q.isMultiple?
-        '<span class="badge">Selección Múltiple</span>':
-        '<span class="badge">Selección Única</span>';
+ questions.forEach((q,i)=>{
 
-        div.innerHTML=`<p><strong>${index+1}. ${q.question}</strong>${typeText}</p>`;
+  const div=document.createElement("div");
+  div.className="question-card";
+  div.innerHTML=`<strong>${i+1}. ${q.question}</strong>`;
 
-        q.options.forEach(opt=>{
-            const label=document.createElement('label');
-            label.className='option';
-            const inputType=q.isMultiple?'checkbox':'radio';
+  q.options.forEach(opt=>{
+   const label=document.createElement("label");
+   label.className="option";
+   label.innerHTML=`
+   <input type="checkbox" name="q${q.id}" value="${opt.letter}">
+   ${opt.letter}) ${opt.content}`;
+   div.appendChild(label);
+  });
 
-            label.innerHTML=`
-            <input type="${inputType}" name="q${q.id}" value="${opt.letter}">
-            ${opt.letter}) ${opt.content}
-            `;
-
-            label.onclick=()=>{
-                if(!q.isMultiple){
-                    label.parentElement.querySelectorAll('.option')
-                    .forEach(el=>el.classList.remove('selected'));
-                }
-                setTimeout(()=>{
-                    label.classList.toggle('selected',
-                    label.querySelector('input').checked);
-                },10);
-            };
-
-            div.appendChild(label);
-        });
-
-        area.appendChild(div);
-    });
+  area.appendChild(div);
+ });
 }
 
-document.getElementById('submit-btn').addEventListener('click', showResults);
+document.getElementById("submit-btn").onclick=finish;
 
-function showResults(){
+function finish(){
 
-    const studentName=document.getElementById('studentName').value.trim();
-    if(!studentName){
-        alert("Debe escribir su nombre");
-        return;
-    }
+ const name=document.getElementById("studentName").value.trim();
+ if(!name){ alert("Escriba su nombre"); return; }
 
-    let correctCount=0;
+ let correct=0;
 
-    allQuestions.forEach(q=>{
-        const selected=Array.from(document.querySelectorAll(`input[name="q${q.id}"]:checked`))
-        .map(el=>el.value).sort();
+ questions.forEach(q=>{
+  const selected=[...document.querySelectorAll(`input[name="q${q.id}"]:checked`)]
+  .map(e=>e.value).sort();
 
-        const expected=[...q.answer].sort();
+  const expected=[...q.answer].sort();
 
-        if(JSON.stringify(selected)===JSON.stringify(expected))
-            correctCount++;
-    });
+  if(JSON.stringify(selected)===JSON.stringify(expected)) correct++;
+ });
 
-    const total=allQuestions.length;
-    const percentage=((correctCount/total)*100).toFixed(1);
-    const endTime=new Date();
-    const duration=Math.floor((endTime-startTime)/1000);
+ const total=questions.length;
+ const percent=((correct/total)*100).toFixed(1);
+ const duration=Math.floor((new Date()-startTime)/1000);
 
-    document.getElementById('quiz-container').classList.add('hidden');
-    document.getElementById('result-container').classList.remove('hidden');
-    document.getElementById('score-text').innerText=
-    `Resultado: ${correctCount}/${total} (${percentage}%)`;
+ document.getElementById("quiz-container").classList.add("hidden");
+ document.getElementById("result-container").classList.remove("hidden");
+ document.getElementById("score-text").innerText=
+ `Resultado: ${correct}/${total} (${percent}%)`;
 
-    sendToGoogleSheets({
-        name:studentName,
-        correct:correctCount,
-        total:total,
-        percentage:percentage,
-        duration:duration
-    });
+ sendData({
+   name,
+   correct,
+   total,
+   percent,
+   duration
+ });
 }
 
-function sendToGoogleSheets(data){
+function sendData(data){
 
-fetch("https://script.google.com/macros/s/AKfycbziHSlOYLxo4TEIcx8IRvewb1Gm2M9n0x0DAguqfZpXXyHctDhPBIoe22T794FWvw3x/exec",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(data)
-})
-.then(res=>res.json())
-.then(res=>console.log("Guardado en Sheets"))
-.catch(err=>console.error("Error:",err));
+ fetch("https://script.google.com/macros/s/AKfycbzeglLlWaxPxM6TG7sLg4UX2gKqMxtQHByIyN12cD9_CmXSIx7OiXUZZpW6tDM-E9o7/exec",{
+   method:"POST",
+   mode:"no-cors",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify(data)
+ });
 
 }
 
 </script>
 </body>
 </html>
-
