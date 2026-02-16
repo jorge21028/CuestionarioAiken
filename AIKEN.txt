@@ -1,0 +1,614 @@
+¿Cuáles son las diferencias entre las unidades de disco duro y los discos de estado sólido? (Elija dos)
+A. Los discos duros tienen un motor y partes móviles, los discos de estado sólido no.
+B. Los discos duros pueden fallar debido a daños físicos, mientras que los discos de estado sólido no pueden fallar.
+C. Los discos de estado sólido pueden almacenar muchas veces más datos que las unidades de disco duro.
+D. /dev/sda es un dispositivo de disco duro mientras que /dev/ssda es un disco de estado sólido.
+E. Los discos de estado sólido proporcionan un acceso más rápido a los datos almacenados que los discos duros.
+ANSWER: A, E
+
+El DNS inverso asigna nombres de host a direcciones IP. ¿Cómo se almacena el nombre de la dirección IP 198.51.100.165 en un servidor DNS?
+A. En el registro A para 165.100.51.198.ipv4.arpa.
+B. En el registro PTR para 165.100.51.198.in-addr.arpa.
+C. En el registro RNAME para 198-51-100-165.rev.arpa.
+D. En el registro ARPA para 165.100.51.198.rev.
+E. En el registro REV para arpa.in-addr.198.51.100.165.
+ANSWER: B
+
+¿Cuál de los siguientes tipos de bus pueden conectar unidades de disco duro con la placa base?
+A. El bus RAM
+B. El bus NUMA
+C. El bus de la CPU
+D. El bus SATA
+E. El Auto bus
+ANSWER: D
+
+Los miembros de un equipo ya tienen experiencia con Red Hat Enterprise Linux. Para un pequeño proyecto de afición, el equipo quiere configurar un servidor Linux sin pagar una suscripción. ¿Cuál de las siguientes distribuciones de Linux permite a los miembros del equipo aplicar la mayor parte posible de sus conocimientos de Red Hat Enterprise Linux?
+A. Ubuntu Linux LTS
+B. Raspbian
+C. Debian GNU/Linux
+D. CentOS
+E. openSUSE
+ANSWER: D
+
+¿Qué información se puede mostrar con top?
+A. Archivos existentes, ordenados por su tamaño.
+B. Procesos en ejecución, ordenados por consumo de CPU o RAM.
+C. Cuentas de usuario, ordenadas por número de inicios de sesión.
+D. Grupos de usuarios, ordenados por número de miembros.
+E. Cuentas de usuario, ordenadas por número de archivos.
+ANSWER: B
+
+¿Cuál de los siguientes comandos se puede usar para resolver un nombre DNS en una dirección IP?
+A. dnsname
+B. dns
+C. query
+D. host
+E. iplookup
+ANSWER: D
+
+¿Cuál de las siguientes salidas proviene del comando free?
+ANSWER: E
+
+¿Qué es cierto acerca del comando dmesg? (Elija dos)
+A. Rastrea la ejecución de un comando y muestra cada paso que lleva a cabo el programa.
+B. Envía mensajes a las líneas de comando de todas las sesiones de usuario actuales.
+C. Muestra el contenido del buffer de anillo del kernel de Linux.
+D. Envía inmediatamente todos los mensajes nuevos escritos en el diario del sistema.
+E. Es posible que no se muestre información antigua porque fue sobrescrita por información más nueva.
+ANSWER: C, E
+
+¿Cuál de las siguientes salidas podría derivarse del comando last?
+A. 1 ls 2 cat text.txt 3 logout
+B. Password for user last changed at Sat Mar 31 16:38:57 EST 2018
+C. Last login: Fri Mar 23 10:56:39 2018 from server.example.com
+D. EXT4-fs (dm-7): mounted filesystem with ordered data mode. Opts: (null)
+E. root tty2 Wed May 17 21:11 - 21:11 (00:00)
+ANSWER: E
+
+¿Cuál es el UID del usuario root?
+A. 1
+B. -1
+C. 255
+D. 65536
+E. 0
+ANSWER: E
+
+¿Qué permisos se establecen en un archivo normal una vez que se han modificado con el comando chmod 654 file.txt?
+A. drw-r-xr--
+B. d-wxr-x--
+C. -wxr-xr-x
+D. -rw-r-xr--
+E. -rw-r-sr--
+ANSWER: D
+
+¿Qué es cierto acerca del propietario de un archivo?
+A. Cada archivo pertenece a exactamente un usuario y un grupo.
+B. El propietario de un archivo siempre tiene permisos completos al acceder al archivo.
+C. El usuario propietario de un archivo debe ser miembro del grupo del archivo.
+D. Cuando se elimina un usuario, todos los archivos que posee el usuario desaparecen.
+E. El propietario de un archivo no se puede cambiar una vez que se le asigna un propietario.
+ANSWER: A
+
+¿Cuáles de los siguientes permisos están configurados en el directorio /tmp/?
+A. rwxrwxrwt
+B. rwx------
+C. rwxrwxrwx
+D. rw-rwS---
+E. r-xr-x--t
+ANSWER: A
+
+¿Qué comando agrega el nuevo usuario tux y crea el directorio de inicio del usuario con archivos de configuración predeterminados?
+A. defaultuser tux
+B. useradd -m tux
+C. usercreate tux
+D. useradd -o default tux
+E. passwd -a tux
+ANSWER: B
+
+¿Qué información se almacena en /etc/passwd? (Elija tres)
+A. El límite de espacio de almacenamiento del usuario
+B. El ID de usuario numérico
+C. El nombre de usuario
+D. La contraseña cifrada
+E. El shell predeterminado del usuario
+ANSWER: B, C, E
+
+¿Cuáles de las siguientes opciones de tar manejan la compresión? (Elija dos)
+A. -bz
+B. -z
+C. -g
+D. -j
+E. -z2
+ANSWER: B, D
+
+¿Qué palabra clave se utiliza en un script de shell para iniciar un bucle? (Especifique solo una palabra clave, sin información adicional)
+ANSWER: for
+
+¿Cuál de los siguientes comandos crea un archivo work.tar a partir del contenido del directorio ./work/?
+A. tar --new work.tar ./work/
+B. tar -cf work.tar ./work/
+C. tar -create work.tgz -content ./work/
+D. tar work.tar < ./work/
+E. tar work > work.tar
+ANSWER: B
+
+¿Cuál de las siguientes teclas se puede presionar para salir de less?
+A. l
+B. x
+C. e
+D. q
+E. !
+ANSWER: D
+
+El directorio actual contiene el siguiente archivo: -rwxr-xr-x 1 root root 859688 Feb 7 08:15 test.sh Dado que el archivo es un script de shell válido, ¿cómo se puede ejecutar este script? (Elija dos)
+A. run test.sh
+B. $(test.sh)
+C. cmd ./test.sh
+D. ./test.sh
+E. bash test.sh
+ANSWER: D, E
+
+¿Cuál de los siguientes comandos ordena la salida del comando export-logs?
+A. export-logs < sort
+B. export-logs > sort
+C. export-logs & sort
+D. export-logs | sort
+E. export-logs <> sort
+ANSWER: D
+
+Un directorio contiene los siguientes archivos: a.txt b.txt c.cav ¿Cuál sería el resultado del siguiente script de shell? for file in *.txt
+A. *.txt
+B. a b
+C. c.cav
+D. a.txt
+E. a.txt b.txt
+ANSWER: E
+
+¿Cuál de los siguientes comandos buscará el archivo foo.txt en el directorio /home?
+A. search /home -file foo.txt
+B. search /home foo.txt
+C. find /home -file foo.txt
+D. find /home -name foo.txt
+E. find /home foo.txt
+ANSWER: D
+
+El directorio actual contiene el siguiente archivo: -rw-r--r-- 1 root exec 24551 Apr 2 12:36 test.sh El archivo contiene un script de shell válido, pero ejecutar este archivo usando ./test.sh genera este error: bash: ./test.sh: Permission denied ¿Qué se debe hacer para ejecutar correctamente el script?
+A. La extensión del archivo debe cambiarse de .sh a .bin.
+B. El bit de ejecución debe configurarse en los permisos del archivo.
+C. El usuario que ejecuta el script debe agregarse al grupo exec.
+D. El bit SetUID debe establecerse en los permisos del archivo.
+E. El script debe ejecutarse utilizando #!./test.sh en lugar de ./test.sh.
+ANSWER: B
+
+¿Qué es una distribución de Linux?
+A. El sistema de archivos Linux como se ve desde la cuenta raíz después de montar todos los sistemas de archivos.
+B. Un paquete del kernel de Linux, utilidades del sistema y otro software.
+C. El conjunto de reglas que rigen la distribución del código fuente del kernel de Linux.
+D. Un sistema operativo basado en Linux pero incompatible con el kernel Linux normal.
+E. Un conjunto de cambios en Linux que permiten que Linux se ejecute en otra arquitectura de procesador.
+ANSWER: B
+
+¿Qué herramienta de gestión de paquetes se utiliza en los sistemas Linux basados en Red Hat?
+A. portage
+B. rpm
+C. apt-get
+D. dpkg
+E. packagectl
+ANSWER: B
+
+¿Cuál de los siguientes programas es un editor gráfico para gráficos vectoriales?
+A. Python
+B. NGINX
+C. Samba
+D. Inkscape
+E. MySQL
+ANSWER: D
+
+¿Dónde se almacena el sistema operativo de una Raspberry Pi?
+A. En el dispositivo maestro conectado al bus IDE de Raspberry Pi.
+B. En una partición de solo lectura en el firmware de Raspberry Pi, junto al BIOS.
+C. En una tarjeta SD extraíble que se coloca en la Raspberry Pi.
+D. En un módulo de extensión de Linux conectado a los pines GPIO de Raspberry Pi.
+E. En el almacenamiento flash regrabable que está integrado en Raspberry Pi.
+ANSWER: C
+
+¿Qué define una licencia de Software Libre?
+A. Detalles de la documentación técnica que cada colaborador debe proporcionar.
+B. Los lenguajes de programación que pueden utilizarse para ampliar el programa licenciado.
+C. Una lista completa de las bibliotecas necesarias para compilar el software con licencia.
+D. Límites a los fines para los cuales puede utilizarse el software licenciado.
+E. Condiciones para la modificación y distribución del software licenciado.
+ANSWER: E
+
+¿Por qué se consideran peligrosas las cookies del navegador web?
+A. Las cookies ayudan a la identificación y seguimiento de los usuarios.
+B. Las cookies son siempre públicas y accesibles para cualquier persona en Internet.
+C. Las cookies consumen cantidades significativas de almacenamiento y pueden agotar el espacio en disco.
+D. Las cookies almacenan datos críticos que se pierden cuando se elimina una cookie.
+E. Las cookies pueden contener y ejecutar virus y malware.
+ANSWER: A
+
+¿Cuáles de los siguientes son servicios típicos que ofrecen los proveedores de nube pública? (Elija tres)
+A. Plataforma como servicio (PaaS)
+B. Infraestructura como servicio (IaaS)
+C. Internet como servicio (IaaS)
+D. Gráficos como servicio (GaaS)
+E. Software como servicio (SaaS)
+ANSWER: A, B, E
+
+¿Cuál de los siguientes caracteres en un indicador de shell indica que el shell se está ejecutando con privilegios de root?
+A. !
+B. #
+C. *
+D. &
+E. $
+ANSWER: B
+
+¿Cuáles de los siguientes comandos se utilizan para obtener información sobre el uso correcto de ls? (Elija dos)
+A. option ls
+B. usage ls
+C. manual ls
+D. man ls
+E. info ls
+ANSWER: D, E
+
+¿Qué es cierto acerca de un listado de directorio recursivo?
+A. Incluye el contenido de los subdirectorios.
+B. Incluye los permisos del directorio listado.
+C. Incluye detalles del interior del sistema de archivos, como los inodos.
+D. Incluye información de propiedad de los archivos.
+E. Incluye una vista previa del contenido de cada archivo en el directorio.
+ANSWER: A
+
+Ejecutar el comando rm Downloads genera el siguiente error: rm: cannot remove 'Downloads/". Is a directory ¿Cuál de los siguientes comandos se puede usar en su lugar para eliminar Downloads, suponiendo que Downloads esté vacío? (Elija dos)
+A. undir Downloads
+B. rmdir Downloads
+C. dir -r Downloads
+D. rem Downloads
+E. rm -r Downloads
+ANSWER: B, E
+
+¿Cuál de los siguientes directorios contiene información, documentación y archivos de configuración de ejemplo para los paquetes de software instalados?
+A. /usr/share/doc/
+B. /etc/defaults/
+C. /var/info/
+D. /doc/
+E. /usr/examples/
+ANSWER: A
+
+¿Cuál de los siguientes comandos agrega el directorio /new/dir/ a la variable de entorno PATH?
+A. PATH=/new/dir.PATH
+B. PATH=/new/dir:PATH
+C. export PATH=/new/dir:PATH
+D. export PATH=/new/dir.PATH
+E. export PATH=/new/dir:$PATH
+ANSWER: E
+
+Un usuario se encuentra actualmente en el directorio /home/user/Downloads/ y ejecuta el comando ls ../Documents/ Suponiendo que exista, ¿qué contenido del directorio se muestra?
+A. /home/user/Documents/
+B. /home/user/Documents/Downloads/
+C. /home/user/Downloads/Documents/
+D. /Documents/
+E. /home/Documents
+ANSWER: A
+
+Un directorio contiene los siguientes tres archivos: texts1.txt texts2.txt texts3.csv ¿Qué comando copia los dos archivos que terminan en .txt al directorio /tmp/?
+A. cp ??.txt /tmp/
+B. cp *.txt /tmp/
+C. cp..txt /tmp/
+D. cp ?.txt /tmp/
+E. cp $?.txt /tmp/
+ANSWER: B
+
+Al escribir una línea de comando larga en el shell, ¿qué carácter se puede usar para dividir un comando en varias líneas?
+ANSWER: \
+
+¿Cuál de los siguientes tipos de registros DNS contiene una dirección IP? (Elija dos)
+A. NS
+B. AAAA
+C. MX
+D. A
+E. CNAME
+ANSWER: B, D
+
+¿Cuál de los siguientes valores podría ser un ID de proceso en Linux?
+A. /bin/bash
+B. 60b503cd-019e-4300-a7be-922fD74ef5ce
+C. /sys/pid/9a14
+D. 1113
+E. 21398
+ANSWER: D, E
+
+¿Cuál de los siguientes es un protocolo utilizado para la configuración automática de direcciones IP?
+A. NFS
+B. LDAP
+C. SMTP
+D. DNS
+E. DHCP
+ANSWER: E
+
+¿Cuál de los siguientes dispositivos representa una partición del disco duro?
+A. /dev/ttyS0
+B. /dev/sata0
+C. /dev/part0
+D. /dev/sda2
+E. /dev/sda/p2
+ANSWER: D
+
+¿Cuál de las siguientes afirmaciones sobre los controladores de hardware de Linux es correcta?
+A. Los controladores son programas Linux normales que debe ejecutar el usuario que desea utilizar un dispositivo.
+B. Linux no utiliza controladores porque el BIOS maneja todo el acceso al hardware en nombre de Linux.
+C. Los controladores se almacenan en sus dispositivos y son copiados por el kernel de Linux cuando se conecta un nuevo dispositivo.
+D. Los controladores se descargan del repositorio de controladores del proveedor cuando se conecta un nuevo dispositivo.
+E. Los controladores se compilan en el kernel de Linux o se cargan como módulos del kernel.
+ANSWER: E
+
+¿Qué se puede encontrar en el directorio /proc/?
+A. Un directorio por programa instalado.
+B. Un archivo de dispositivo por dispositivo de hardware.
+C. Un archivo por cada cuenta de usuario existente.
+D. Un directorio por proceso en ejecución.
+E. Un archivo de registro por cada servicio en ejecución.
+ANSWER: D
+
+Es necesario instalar un nuevo servidor para alojar servicios durante un período de varios años. Durante este tiempo, el servidor debe recibir importantes actualizaciones de seguridad de su distribución de Linux. ¿Cuáles de las siguientes distribuciones de Linux cumplen estos requisitos? (Elija dos)
+A. Ubuntu Linux LTS
+B. Fedora Linux
+C. Debian GNU/Linux Unstable
+D. Ubuntu Linux non-LTS
+E. Red Hat Enterprise Linux
+ANSWER: A, E
+
+¿Cuál de los siguientes directorios debe montarse con acceso de lectura y escritura si reside en su propio sistema de archivos dedicado?
+A. /opt
+B. /lib
+C. /etc
+D. /var
+E. /usr
+ANSWER: D
+
+Se debe cambiar la propiedad del archivo doku.odt. El nuevo propietario se llama tux. ¿Qué comando realiza este cambio?
+A. chmod u x doku.odt
+B. newuser doku.odt tux
+C. chown tux doku.odt
+D. transfer tux:doku.odt
+E. passwd doku.odt:tux
+ANSWER: C
+
+¿Qué sucede con un archivo que se encuentra fuera del directorio de inicio cuando se elimina la cuenta del propietario del archivo? (Elija dos)
+A. Durante una verificación del sistema de archivos, el archivo se mueve a /lost+found.
+B. El archivo se elimina del sistema de archivos.
+C. El UID del propietario anterior se muestra al enumerar los detalles del archivo.
+D. El usuario root se establece como el nuevo propietario del archivo.
+E. La propiedad y los permisos del archivo permanecen sin cambios.
+ANSWER: C, E
+
+¿Qué afirmaciones sobre el directorio /etc/skel son correctas? (Elija dos)
+A. Las configuraciones personales del usuario root se almacenan en este directorio.
+B. Los archivos del directorio se copian al directorio de inicio del nuevo usuario al iniciar el sistema.
+C. Los archivos del directorio se copian al directorio de inicio de un nuevo usuario cuando se crea la cuenta.
+D. El directorio contiene un conjunto predeterminado de archivos de configuración utilizados por el comando useradd.
+E. El directorio contiene la configuración global del sistema Linux.
+ANSWER: C, D
+
+¿Qué es cierto acerca de los enlaces en un sistema de archivos Linux?
+A. Un enlace simbólico solo puede apuntar a un archivo y no a un directorio.
+B. Un enlace duro solo puede apuntar a un directorio y nunca a un archivo.
+C. Cuando se mueve el destino del enlace simbólico, el enlace se actualiza automáticamente.
+D. Un enlace simbólico puede apuntar a un archivo en otro sistema de archivos.
+E. Solo el usuario root puede crear enlaces duros.
+ANSWER: D
+
+¿Qué archivos son la fuente de la información en la siguiente salida? (Elija dos) uid=1000 (bob) gid=1000 (bob) groups=1000 (bob), 10 (wheel), 150 (wireshark), 989 (docker), 1001 (libvirt)
+A. /etc/id
+B. /etc/passwd
+C. /etc/group
+D. /home/index
+E. /var/db/users
+ANSWER: B, C
+
+¿Cuáles de las siguientes tareas puede realizar el comando passwd? (Elija dos)
+A. Cambiar el nombre de usuario de un usuario.
+B. Cambiar la contraseña de un usuario.
+C. Crear una nueva cuenta de usuario.
+D. Crear un nuevo grupo de usuarios.
+E. Bloquear una cuenta de usuario.
+ANSWER: B, E
+
+¿Qué es cierto acerca del comando su?
+A. Es el shell predeterminado de la cuenta root.
+B. Solo puede ser utilizado por el usuario root.
+C. Ejecuta un shell o comando como otro usuario.
+D. Cambia el nombre de la cuenta de administrador principal.
+E. Bloquea la cuenta root en períodos de tiempo específicos.
+ANSWER: C
+
+¿Qué parámetro de ls imprime una lista recursiva del contenido de un directorio? (Especifique SOLO el nombre de la opción sin ningún valor ni parámetro)
+ANSWER: -R
+
+La mayoría de los comandos en Linux pueden mostrar información sobre su uso. ¿Cómo se suele mostrar esta información?
+A. Ejecutando el comando con la opción /? o /??.
+B. Ejecutando el comando con la opción ?! o ?=!.
+C. Ejecutando el comando con la opción /doc o /documentation.
+D. Ejecutando el comando con la opción -h o --help.
+E. Ejecutando el comando con la opción -m o --manpage.
+ANSWER: D
+
+¿Cuál de los siguientes comandos muestra la ruta absoluta al directorio de trabajo actual?
+A. who
+B. cd ..
+C. pwd
+D. ls -l
+E. cd /home
+ANSWER: C
+
+¿Cuál de los siguientes comandos genera el contenido del archivo Texts 2.txt? (Elija dos)
+A. cat 'Texts 2.txt'
+B. cat -- Texts 2.txt
+C. cat |Texts 2.txt|
+D. cat 'Texts\ 2.txt'
+E. cat Texts\ 2.txt
+ANSWER: A, E
+
+¿Qué comando muestra solo los nombres de los archivos y ninguna información adicional?
+A. ls -a
+B. ls -lh
+C. ls -l
+D. ls -alh
+E. ls -nl
+ANSWER: A
+
+¿Cuál es el propósito de la variable de entorno PATH?
+A. Permite la ejecución de comandos sin necesidad de conocer la ubicación del ejecutable.
+B. Aumenta la seguridad al evitar que los comandos se ejecuten en determinadas ubicaciones.
+C. Especifica la ubicación del directorio de inicio de un usuario.
+D. Indica la ubicación del shell predeterminado que se utilizará cuando un usuario inicia sesión.
+E. Contiene la ruta absoluta al directorio actual.
+ANSWER: A
+
+¿Cuál de los siguientes comandos establece la variable USERNAME en el valor bob?
+A. set USERNAME bob
+B. $USERNAME==bob
+C. var USERNAME=bob
+D. USERNAME<=bob
+E. USERNAME=bob
+ANSWER: E
+
+¿Qué comando muestra páginas del manual? (Especifique SOLO el comando sin ninguna ruta ni parámetros)
+ANSWER: man
+
+¿Qué comando copia el contenido del directorio /etc/, incluidos todos los subdirectorios, a /root/?
+A. copy /etc /root
+B. cp -r /etc/ /root
+C. cp -v /etc/* /root
+D. rcp /etc/* /root
+E. cp -R /etc/. /root
+ANSWER: E
+
+¿Cuál de los siguientes comandos ordena alfabéticamente las líneas del archivo data.csv?
+A. a..z data.csv
+B. sort data.csv
+C. abc data.csv
+D. wc -s data.csv
+E. grep --sort data.csv
+ANSWER: B
+
+¿Cuál de los siguientes ejemplos muestra la estructura general de un bucle for en un script de shell?
+A. for *.txt as file => echo $file
+B. for *.txt ( echo $i )
+C. for file in *.txt do echo $i done
+D. for ls *.txt exec {} ;
+E. foreach @{file} ( echo $i }
+ANSWER: C
+
+¿Qué operador en una expresión regular coincide con el carácter anterior cero o una vez?
+A. ?
+B. *
+C. +
+D. %
+E. $
+ANSWER: A
+
+El archivo script.sh en el directorio actual contiene lo siguiente: echo $MYVAR Los siguientes comandos se utilizan para ejecutar este script: El resultado es una línea vacía en lugar del contenido de la variable MYVAR. ¿Cómo se debe configurar MYVAR para que script.sh muestre su contenido?
+A. !MYVAR=value
+B. env MYVAR=value
+C. MYVAR=value
+D. $MYVAR=value
+E. export MYVAR=value
+ANSWER: E
+
+¿Cuál es el valor de retorno de un script de shell después de una ejecución exitosa?
+A. 1
+B. 0
+C. -1
+D. -255
+E. 255
+ANSWER: B
+
+¿Cuál de los siguientes comandos crea el archivo ZIP poems.zip que contiene todos los archivos en el directorio actual cuyos nombres terminan en .txt?
+A. zip *.txt > poems.zip
+B. zcat *.txt poems.zip
+C. zip poems.zip *.txt
+D. zip cfz poems.zip *.txt
+E. cat *.txt | zip poems.zip
+ANSWER: C
+
+¿Cuáles de las siguientes afirmaciones son verdaderas con respecto a un script de shell típico? (Elija dos)
+A. Tiene establecido el bit de permiso ejecutable.
+B. Comienza con la secuencia de dos caracteres #!.
+C. Se encuentra en /usr/local/scripts/.
+D. Se encuentra en /etc/bash/scripts/.
+E. Se compila en un archivo binario compatible con la arquitectura actual de la máquina.
+ANSWER: A, B
+
+¿Cuál de los siguientes comandos extrae el contenido del archivo comprimido file1.tar.gz?
+A. tar -czf file1.tar.gz
+B. ztar file1.tar.gz
+C. tar -xzf file1.tar.gz
+D. tar --extract file1.tar.gz
+E. detar file1.tar.gz
+ANSWER: C
+
+¿Cuál de los siguientes comandos encuentra todas las líneas en el archivo operating-systems.txt que contienen el término linux, independientemente de si es mayúscula o minúscula?
+A. igrep linux operating-systems.txt
+B. less -i linux operating-systems.txt
+C. grep -i linux operating-systems.txt
+D. cut linux operating-systems.txt
+E. cut [LI] [Ii] [Nn] [Uu] [Xx] operating-systems.txt
+ANSWER: C
+
+¿Cuál de las siguientes afirmaciones sobre las contraseñas de Linux es verdadera?
+A. Todas las contraseñas se pueden descifrar utilizando la contraseña maestra del administrador del sistema.
+B. Las contraseñas nunca pueden comenzar con una letra que no sea una letra.
+C. Los usuarios no pueden cambiar su contraseña una vez establecida.
+D. Las contraseñas solo se almacenan en formato hash.
+E. Las contraseñas pueden tener como máximo seis caracteres.
+ANSWER: D
+
+¿Cuáles de los siguientes programas son servidores web? (Elija dos)
+A. Apache HTTPD
+B. Postfix
+C. Curl
+D. Dovecot
+E. NGINX
+ANSWER: A, E
+
+¿Cuál de las siguientes distribuciones de Linux se deriva de Red Hat Enterprise Linux?
+A. Raspbian
+B. openSUSE
+C. Debian
+D. Ubuntu
+E. CentOS
+ANSWER: E
+
+¿Cuál de las siguientes afirmaciones es verdadera sobre el Software Libre?
+A. Es desarrollado únicamente por voluntarios.
+B. Puede ser modificado por cualquier persona que lo utilice.
+C. Debe estar siempre disponible de forma gratuita.
+D. Solo funciona en Linux.
+E. Solo se distribuye como binario compilado.
+ANSWER: B
+
+¿Cómo se aprovisiona una nueva instancia informática de Linux en una nube IaaS?
+A. El instalador estándar de Linux debe ejecutarse a través de una consola remota.
+B. Después de comprar una distribución de Linux, su proveedor la entrega a una instancia de nube.
+C. La instalación debe prepararse en una máquina virtual local que luego se copia a la nube.
+D. La organización de alojamiento en la nube proporciona un conjunto de imágenes preparadas de distribuciones de Linux populares.
+E. Se carga en el proveedor de la nube un archivo de configuración específico del proveedor que describe la instalación deseada.
+ANSWER: D
+
+¿Cuáles son las diferencias entre una ventana privada del navegador web y una ventana normal del navegador web? (Elija tres)
+A. Las ventanas privadas del navegador web no permiten imprimir ni almacenar sitios web.
+B. Las ventanas privadas del navegador web no almacenan cookies de forma persistente.
+C. Las ventanas privadas del navegador web no admiten inicios de sesión en sitios web.
+D. Las ventanas privadas del navegador web no guardan registros en el historial del navegador.
+E. Las ventanas privadas del navegador web no envían cookies almacenadas regularmente.
+ANSWER: B, D, E
+
+¿Cuál es la fuente preferida para la instalación de nuevas aplicaciones en un sistema operativo basado en Linux?
+A. El sistema de gestión de versiones del proveedor
+B. Un disco CD-ROM
+C. El repositorio de paquetes de la distribución
+D. El sitio web del vendedor
+E. Una tienda minorista
+ANSWER: C
