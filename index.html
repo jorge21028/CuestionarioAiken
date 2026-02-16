@@ -237,7 +237,7 @@ function showResults(){
 
 function sendToGoogleSheets(data){
 
-fetch("URL_WEBAPP",{
+fetch("https://script.google.com/macros/s/AKfycbziHSlOYLxo4TEIcx8IRvewb1Gm2M9n0x0DAguqfZpXXyHctDhPBIoe22T794FWvw3x/exec",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(data)
