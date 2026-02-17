@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluación Académica Pro</title>
+
+<style>
+:root{
+ --primary:#2c3e50;
+ --background:#f4f7f6;
+}
+body{
+ font-family:Segoe UI,sans-serif;
+ background:var(--background);
+ padding:20px;
+}
+.container{
+ max-width:800px;
+ margin:auto;
+ background:white;
+ padding:30px;
+ border-radius:8px;
+ box-shadow:0 4px 6px rgba(0,0,0,0.1);
+}
+.progress-bar{
+ height:10px;
+ background:#ddd;
+ border-radius:5px;
+ margin-bottom:15px;
+ overflow:hidden;
+}
+.progress{
+ height:10px;
+ background:var(--primary);
+ width:0%;
+}
+.option{
+ display:block;
+ padding:8px;
+ margin:6px 0;
+ border:1px solid #ddd;
+ border-radius:4px;
+ cursor:pointer;
+}
+button{
+ background:var(--primary);
+ color:white;
+ border:none;
+ padding:8px 15px;
+ border-radius:4px;
+ cursor:pointer;
+ margin:5px 5px 0 0;
+}
+.hidden{display:none;}
+.result-box{
+ margin-top:20px;
+ padding:15px;
+ border-radius:5px;
+ background:#f9f9f9;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>Evaluación Académica</h2>
+
+<label>Nombre del estudiante:</label>
+<input type="text" id="studentName">
+
+<button onclick="startQuiz()">Iniciar</button>
+<button onclick="consultAttempts()">Ver intentos previos</button>
+
+<div id="quiz-section" class="hidden">
+
+<div class="progress-bar">
+<div class="progress" id="progress"></div>
+</div>
+
+<div id="question-area"></div>
+
+<button onclick="prevQuestion()">Anterior</button>
+<button onclick="nextQuestion()">Siguiente</button>
+<button onclick="finishQuiz()">Finalizar</button>
+
+</div>
+
+<div id="result-section" class="hidden">
+<h3>Resultado</h3>
+<p id="score-text"></p>
+<div id="detail"></div>
+<button onclick="downloadPDF()">Exportar PDF</button>
+<button onclick="location.reload()">Reiniciar</button>
+</div>
+
+<div id="history-section"></div>
+
+</div>
+
+<script>
+
+let questions=[];
+let currentIndex=0;
+let answers={};
+let startTime;
+let reportHTML="";
+
+const urlAiken="https://jorge21028.github.io/CuestionarioAiken/AIKEN.txt";
+const urlScript="https://script.google.com/macros/s/AKfycbw-uyq9URbIGA3pxY-mlJ_qU1WRZ9LXmaQuliD5IgLrxjD9YA9cfYjXJabD3q9CQphU/exec";
+
+window.onload=loadFile;
+
+function loadFile(){
+ fetch(urlAiken)
+ .then(res=>res.text())
+ .then(parseAiken);
+}
+
+function parseAiken(text){
+ const lines=text.split(/\r?\n/);
+ let current=null;
+
+ lines.forEach(line=>{
+   line=line.trim();
+   if(!line) return;
+
+   if(line.startsWith("ANSWER:")){
+     current.answer=line.split(":")[1].trim().split(/[\s,]+/);
+     current.id=questions.length;
+     questions.push(current);
+     current=null;
+   }
+   else if(/^[A-Z][\.\)]/.test(line)){
+     current.options.push({
+       letter:line[0],
+       content:line.substring(2).trim()
+     });
+   }
+   else{
+     current={question:line,options:[]};
+   }
+ });
+}
+
+function startQuiz(){
+ const name=document.getElementById("studentName").value.trim();
+ if(!name){alert("Escriba su nombre");return;}
+ document.getElementById("quiz-section").classList.remove("hidden");
+ currentIndex=0;
+ answers={};
+ startTime=new Date();
+ renderQuestion();
+}
+
+function renderQuestion(){
+ const q=questions[currentIndex];
+ const area=document.getElementById("question-area");
+ area.innerHTML=`<h4>${currentIndex+1}. ${q.question}</h4>`;
+
+ q.options.forEach(opt=>{
+  const checked=(answers[q.id]||[]).includes(opt.letter)?"checked":"";
+  area.innerHTML+=`
+   <label class="option">
+   <input type="checkbox" value="${opt.letter}" ${checked}
+   onchange="saveAnswer(${q.id},this)">
+   ${opt.letter}) ${opt.content}
+   </label>`;
+ });
+
+ updateProgress();
+}
+
+function saveAnswer(id,element){
+ if(!answers[id]) answers[id]=[];
+ if(element.checked){
+   answers[id].push(element.value);
+ }else{
+   answers[id]=answers[id].filter(v=>v!==element.value);
+ }
+}
+
+function nextQuestion(){
+ if(currentIndex<questions.length-1){
+   currentIndex++;
+   renderQuestion();
+ }
+}
+
+function prevQuestion(){
+ if(currentIndex>0){
+   currentIndex--;
+   renderQuestion();
+ }
+}
+
+function updateProgress(){
+ const percent=((currentIndex+1)/questions.length)*100;
+ document.getElementById("progress").style.width=percent+"%";
+}
+
+function finishQuiz(){
+
+ let correct=0;
+ let detailHTML="";
+
+ questions.forEach((q,i)=>{
+  const selected=(answers[q.id]||[]).sort();
+  const expected=[...q.answer].sort();
+  const ok=JSON.stringify(selected)===JSON.stringify(expected);
+
+  if(ok) correct++;
+
+  const correctText=q.options
+   .filter(o=>expected.includes(o.letter))
+   .map(o=>o.letter+") "+o.content)
+   .join("<br>");
+
+  detailHTML+=`
+  <div class="result-box">
+  <strong>${i+1}. ${q.question}</strong><br>
+  ${ok?"✔ Correcta":"✘ Incorrecta"}<br>
+  <strong>Correctas:</strong><br>${correctText}
+  </div>`;
+ });
+
+ const total=questions.length;
+ const percent=((correct/total)*100).toFixed(1);
+ const duration=Math.floor((new Date()-startTime)/1000);
+
+ document.getElementById("quiz-section").classList.add("hidden");
+ document.getElementById("result-section").classList.remove("hidden");
+ document.getElementById("score-text").innerText=
+ `Resultado: ${correct}/${total} (${percent}%) - Tiempo: ${duration}s`;
+
+ document.getElementById("detail").innerHTML=detailHTML;
+ reportHTML=document.getElementById("result-section").innerHTML;
+
+ sendData({
+  name:document.getElementById("studentName").value,
+  correct,total,percent,duration
+ });
+}
+
+function downloadPDF(){
+ const win=window.open("");
+ win.document.write("<html><head><title>Reporte</title></head><body>");
+ win.document.write(reportHTML);
+ win.document.write("</body></html>");
+ win.print();
+ win.close();
+}
+
+function sendData(data){
+ fetch(urlScript,{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({...data,action:"save"})
+ });
+}
+
+function consultAttempts(){
+ const name=document.getElementById("studentName").value.trim();
+ if(!name){alert("Escriba su nombre");return;}
+
+ fetch(urlScript,{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({action:"history",name})
+ })
+ .then(res=>res.json())
+ .then(data=>{
+   let html="<h3>Intentos previos</h3>";
+   data.forEach(r=>{
+    html+=`<div class="result-box">
+    Fecha: ${r.date}<br>
+    Nota: ${r.percent}%<br>
+    Tiempo: ${r.duration}s
+    </div>`;
+   });
+   document.getElementById("history-section").innerHTML=html;
+ });
+}
+
+</script>
+</body>
+</html>
