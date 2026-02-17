@@ -70,6 +70,7 @@ input[type="text"]{
 <div id="result-container" class="hidden">
  <h2>Resultado</h2>
  <p id="score-text" style="font-weight:bold;font-size:1.3em;"></p>
+ <div id="detail-container" style="margin-top:20px;"></div>
  <button onclick="location.reload()">Reiniciar</button>
 </div>
 
@@ -160,14 +161,40 @@ function finish(){
  if(!name){ alert("Escriba su nombre"); return; }
 
  let correct=0;
+ let detailsHTML="";
+ 
+ questions.forEach((q,index)=>{
 
- questions.forEach(q=>{
   const selected=[...document.querySelectorAll(`input[name="q${q.id}"]:checked`)]
   .map(e=>e.value).sort();
 
   const expected=[...q.answer].sort();
 
-  if(JSON.stringify(selected)===JSON.stringify(expected)) correct++;
+  const isCorrect=JSON.stringify(selected)===JSON.stringify(expected);
+
+  if(isCorrect){
+     correct++;
+     detailsHTML+=`
+     <div style="margin-bottom:15px;padding:10px;border-left:5px solid green;background:#eefbea;">
+       <strong>${index+1}. ${q.question}</strong><br>
+       ✔ Correcta
+     </div>`;
+  }else{
+
+     const correctOptions=q.options
+      .filter(opt=>expected.includes(opt.letter))
+      .map(opt=>`${opt.letter}) ${opt.content}`)
+      .join("<br>");
+
+     detailsHTML+=`
+     <div style="margin-bottom:15px;padding:10px;border-left:5px solid red;background:#fdeeee;">
+       <strong>${index+1}. ${q.question}</strong><br>
+       ✘ Incorrecta<br>
+       <strong>Opciones correctas:</strong><br>
+       ${correctOptions}
+     </div>`;
+  }
+
  });
 
  const total=questions.length;
@@ -179,6 +206,8 @@ function finish(){
  document.getElementById("score-text").innerText=
  `Resultado: ${correct}/${total} (${percent}%)`;
 
+ document.getElementById("detail-container").innerHTML=detailsHTML;
+
  sendData({
    name,
    correct,
@@ -187,6 +216,7 @@ function finish(){
    duration
  });
 }
+
 
 function sendData(data){
 
