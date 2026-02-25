@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Académica - Selección Aleatoria</title>
+
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --background: #f4f7f6;
+            --success: #27ae60;
+            --danger: #e74c3c;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background);
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .question-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 5px solid var(--primary);
+            background: #f9f9f9;
+            border-radius: 0 4px 4px 0;
+        }
+        .option {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .option:hover {
+            background: #f0f0f0;
+        }
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .hidden { display: none; }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .result-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Evaluación Académica</h1>
+    <hr>
+    
+    <div id="setup-container">
+        <label for="studentName"><strong>Nombre del estudiante:</strong></label>
+        <input type="text" id="studentName" placeholder="Ingrese su nombre completo...">
+        <p><small>* Al iniciar, se seleccionará aleatoriamente el 50% de las preguntas del banco de datos.</small></p>
+    </div>
+
+    <div id="quiz-container" class="hidden">
+        <div id="questions-area"></div>
+        <button id="submit-btn">Finalizar y Calificar</button>
+    </div>
+
+    <div id="result-container" class="hidden">
+        <h2>Resultado de la Evaluación</h2>
+        <p id="score-text" style="font-weight:bold; font-size:1.5em; color: var(--primary);"></p>
+        <div id="detail-container" style="margin-top:20px;"></div>
+        <button onclick="location.reload()">Reiniciar Evaluación</button>
+    </div>
+</div>
+
+<script>
+    let allQuestions = []; // Banco total
+    let questions = [];    // Muestra seleccionada (50%)
+    let startTime;
+
+    window.onload = loadFile;
+
+    function loadFile() {
+        const url = "https://jorge21028.github.io/CuestionarioAiken/AIKEN.txt";
+
+        fetch(url)
+            .then(res => {
+                if (!res.ok) throw new Error("No se pudo obtener el archivo");
+                return res.text();
+            })
+            .then(text => {
+                parseAiken(text);
+                prepareQuiz();
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error cargando el banco de preguntas desde GitHub.");
+            });
+    }
+
+    function parseAiken(text) {
+        const lines = text.split(/\r?\n/);
+        let current = null;
+
+        lines.forEach(line => {
+            line = line.trim();
+            if (!line) return;
+
+            if (line.startsWith("ANSWER:")) {
+                current.answer = line.split(":")[1].trim().split(/[\s,]+/);
+                current.id = allQuestions.length;
+                allQuestions.push(current);
+                current = null;
+            } else if (/^[A-Z][\.\)]/.test(line)) {
+                current.options.push({
+                    letter: line[0],
+                    content: line.substring(2).trim()
+                });
+            } else {
+                current = { question: line, options: [] };
+            }
+        });
+    }
+
+    function prepareQuiz() {
+        // 1. Clonamos el banco de preguntas
+        let pool = [...allQuestions];
+
+        // 2. Algoritmo Fisher-Yates para barajar (Shuffle)
+        for (let i = pool.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+
+        // 3. Seleccionamos el 50% (redondeado hacia arriba si es impar)
+        const totalAExtraer = Math.ceil(pool.length / 2);
+        questions = pool.slice(0, totalAExtraer);
+
+        // Mostramos el contenedor una vez listo
+        document.getElementById("quiz-container").classList.remove("hidden");
+        render();
+        startTime = new Date();
+    }
+
+    function render() {
+        const area = document.getElementById("questions-area");
+        area.innerHTML = "";
+
+        questions.forEach((q, i) => {
+            const div = document.createElement("div");
+            div.className = "question-card";
+            div.innerHTML = `<p><strong>${i + 1}. ${q.question}</strong></p>`;
+
+            q.options.forEach(opt => {
+                const label = document.createElement("label");
+                label.className = "option";
+                label.innerHTML = `
+                    <input type="checkbox" name="q${q.id}" value="${opt.letter}">
+                    ${opt.letter}) ${opt.content}
+                `;
+                div.appendChild(label);
+            });
+            area.appendChild(div);
+        });
+    }
+
+    document.getElementById("submit-btn").onclick = finish;
+
+    function finish() {
+        const name = document.getElementById("studentName").value.trim();
+        if (!name) { 
+            alert("Por favor, escriba su nombre antes de finalizar."); 
+            document.getElementById("studentName").focus();
+            return; 
+        }
+
+        let correctCount = 0;
+        let detailsHTML = "";
+        
+        questions.forEach((q, index) => {
+            const selected = [...document.querySelectorAll(`input[name="q${q.id}"]:checked`)]
+                .map(e => e.value).sort();
+            const expected = [...q.answer].sort();
+            const isCorrect = JSON.stringify(selected) === JSON.stringify(expected);
+
+            if (isCorrect) {
+                correctCount++;
+                detailsHTML += `
+                    <div class="result-item" style="border-left:5px solid var(--success); background:#eefbea;">
+                        <strong>${index + 1}. ${q.question}</strong><br>
+                        <span style="color:var(--success)">✔ Correcta</span>
+                    </div>`;
+            } else {
+                const correctOptions = q.options
+                    .filter(opt => expected.includes(opt.letter))
+                    .map(opt => `${opt.letter}) ${opt.content}`)
+                    .join("<br>");
+
+                detailsHTML += `
+                    <div class="result-item" style="border-left:5px solid var(--danger); background:#fdeeee;">
+                        <strong>${index + 1}. ${q.question}</strong><br>
+                        <span style="color:var(--danger)">✘ Incorrecta</span><br>
+                        <strong>Respuesta correcta:</strong><br>${correctOptions}
+                    </div>`;
+            }
+        });
+
+        const total = questions.length;
+        const percent = ((correctCount / total) * 100).toFixed(1);
+        const duration = Math.floor((new Date() - startTime) / 1000);
+
+        document.getElementById("quiz-container").classList.add("hidden");
+        document.getElementById("setup-container").classList.add("hidden");
+        document.getElementById("result-container").classList.remove("hidden");
+        
+        document.getElementById("score-text").innerText = 
+            `Calificación: ${correctCount}/${total} (${percent}%)`;
+        document.getElementById("detail-container").innerHTML = detailsHTML;
+
+        // Envío de datos a su Google Script
+        sendData({
+            name,
+            correct: correctCount,
+            total,
+            percent,
+            duration
+        });
+    }
+
+    function sendData(data) {
+        fetch("https://script.google.com/macros/s/AKfycbw-uyq9URbIGA3pxY-mlJ_qU1WRZ9LXmaQuliD5IgLrxjD9YA9cfYjXJabD3q9CQphU/exec", {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+    }
+</script>
+
+</body>
+</html>
